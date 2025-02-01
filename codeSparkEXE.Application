@@ -1,0 +1,60 @@
+import sys
+import time
+import random
+import os
+
+def glitch_text(text, chance=0.2):
+    """Randomly glitches text for a creepy effect."""
+    glitched = ""
+    for char in text:
+        if random.random() < chance:
+            glitched += random.choice("@#$%&*!?")
+        else:
+            glitched += char
+    return glitched
+
+def slow_type(text, delay=0.05, glitch=False):
+    """Simulates slow, typewriter-like text output."""
+    for char in text:
+        sys.stdout.write(glitch_text(char) if glitch else char)
+        sys.stdout.flush()
+        time.sleep(delay)
+    print("")
+
+def start_game():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    slow_type("WELCOME TO CODESPARK ACADEMY! LET’S START CODING!", delay=0.05)
+    time.sleep(1)
+    
+    name = input("Enter your name: ")
+    time.sleep(1)
+    
+    slow_type(f"WELCOME BACK, {name.upper()}.", glitch=True)
+    time.sleep(2)
+    
+    slow_type("YOU CAN'T LEAVE.", glitch=True)
+    time.sleep(3)
+    
+    slow_type("System Error...", glitch=True)
+    time.sleep(2)
+    os.system('cls' if os.name == 'nt' else 'clear')
+    
+    while True:
+        choice = input("Would you like to continue? [Y/N] ").strip().lower()
+        if choice == 'y':
+            slow_type("Loading next module...", glitch=True)
+            time.sleep(2)
+            slow_type("ERROR: Coach Codey is watching.", glitch=True)
+            time.sleep(2)
+            break
+        elif choice == 'n':
+            slow_type("You can't quit now...", glitch=True)
+        else:
+            slow_type("Invalid input. Try again.")
+    
+    slow_type("DEBUGGING SYSTEM...", glitch=True)
+    time.sleep(3)
+    slow_type("CRITICAL FAILURE. RUN CODEY.EXE.", glitch=True)
+    
+if __name__ == "__main__":
+    start_game()
